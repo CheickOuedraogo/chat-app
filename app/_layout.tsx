@@ -1,8 +1,11 @@
-import { HeaderTitle } from "@react-navigation/elements";
-import { Stack } from "expo-router";
+
+import { Stack, Tabs } from "expo-router";
 
 export default function RootLayout() {
-  return <Stack>
-    <Stack.Screen name="index" options={{headerShown: false, statusBarHidden: true}}/>
-  </Stack>;
+  return <Tabs>
+      <Tabs.Screen name="connexion" options={{headerShown: false }}/>
+      <Tabs.Screen name="index" options={{headerShown: false}}/>
+      <Tabs.Screen name="(pages)" options={{headerShown: false,title: "message"}}/>
+     </Tabs>
+  
 }
