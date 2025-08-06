@@ -1,23 +1,64 @@
-import { View, Text, TextInput, KeyboardAvoidingView, Pressable, Platform } from "react-native";
+import {
+  View,
+  TextInput,
+  Pressable,
+  StyleSheet,
+} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import React from "react";
+import React, { useState } from "react";
+interface InputMessageProps {
+  prop: (message: string) => void;
+}
 
-const InputMessage = () => {
+const InputMessage: React.FC<InputMessageProps> = ({prop}) => {
+  const [text, setText] = useState("");
   return (
-    <View
-      className="w-screen flex-row items-center"
-    >
+
+      <View style={styles.view}>
         <TextInput
-        placeholder="entre votre message ..."
+          placeholder="entre votre message ..."
           multiline
-          className="flex-1 p-3 min-h-[48px] max-h-[100px] m-4 rounded-lg outline-none border-none border-transparent  ring-0 bg-white"
+          style={styles.input}
+          value={text}
+          onChangeText={(textValue) => setText(textValue)}
         />
-        <Pressable className="h-full justify-center items-center">
+        <Pressable
+          onPress={() => {
+            prop(text);
+          }}
+        >
           <Ionicons name="send-outline" size={24} color="black" />
         </Pressable>
-      
-    </View>
+      </View>
+
   );
 };
 
 export default InputMessage;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  view: {
+    flex: 1,
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  input: {
+    flex: 1,
+    padding: 12,
+    margin: 4,
+    borderRadius: 5,
+    outline: "none",
+    borderColor: "transparent",
+    backgroundColor: "white",
+  },
+  pressable: {
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    //className = "h-full justify-center items-center",
+  },
+});

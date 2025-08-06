@@ -1,7 +1,7 @@
 interface Imessage {
   direction: "left" | "right";
   details: string;
-  time: string;
+  time: Date;
   state: "send" | "receive" | "read";
 }
 
