@@ -1,80 +1,111 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import React from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-interface roomProps{
-  username:String;
-  lastMessage: String;
+interface RoomProps {
+  username: string;
+  lastMessage: string;
   date: Date;
-  numero: String;
+  numero: string;
+  formattedDate?: string;
 }
 
-function cutMessage(message : String):String{
-  if(message.length < 30) return message
-  return message.slice(0,30) + " ..."
+function cutMessage(message: string): string {
+  if(message.length < 50) return message;
+  return message.slice(0,50) + "...";
 }
-function getIcone(username: String): String {
-  if(username && username.length > 0)
-    return username[0]
-  return "??"
+
+function getInitials(username: string): string {
+  if(username && username.length > 0) {
+    const names = username.split(' ');
+    if (names.length >= 2) {
+      return (names[0][0] + names[1][0]).toUpperCase();
+    }
+    return username[0].toUpperCase();
+  }
+  return "??";
 }
-const roomBox = (prop: roomProps) => {
+
+const RoomBox: React.FC<RoomProps> = (props) => {
   return (
-    <View style={styles.view}>
-      <View style={styles.details}>
-        <View style={styles.icone}>
-          <Text style={styles.iconeText}>{getIcone(prop.username)}</Text>
-        </View>
-        <View style={styles.data}>
-          <Text style={styles.username}>{prop.username || prop.numero}</Text>
-          <Text> {cutMessage(prop.lastMessage)}</Text>
-        </View>
+    <Pressable style={styles.container}>
+      <View style={styles.avatar}>
+        <Text style={styles.avatarText}>{getInitials(props.username)}</Text>
       </View>
-      <View style={styles.date}>
-        <Text> THU 05:12</Text>
+      <View style={styles.content}>
+        <View style={styles.header}>
+          <Text style={styles.username}>{props.username || props.numero}</Text>
+          <Text style={styles.date}>{props.formattedDate || "THU 05:12"}</Text>
+        </View>
+        <Text style={styles.message} numberOfLines={2}>
+          {cutMessage(props.lastMessage)}
+        </Text>
       </View>
-    </View>
+      <View style={styles.actions}>
+        <Ionicons name="chevron-forward" size={16} color="#C7C7CC" />
+      </View>
+    </Pressable>
   );
 };
+
 const styles = StyleSheet.create({
-  data:{
-    marginLeft:15
-  },
-  username:{
-    fontWeight:"600",
-    textAlign:"center",
-    marginLeft: 15
-  },
-  details:{
-    flexDirection:"row"
-  },
-  date:{
-    margin:10
-  },
-  view: {
-    width: "100%",
+  container: {
     flexDirection: "row",
-    backgroundColor: "#CCC8BF",
-    margin: 5,
-    padding: 10,
-    justifyContent: "space-between"
-  },
-  icone: {
-    borderRadius: "50%",
-    backgroundColor: "blue",
-    height: 50,
-    width: 50,
     alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "flex-start",
+    backgroundColor: "white",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F2F2F7",
   },
-  iconeText: {
-    fontSize: 25,
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: "#007AFF",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+    shadowColor: "#007AFF",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  avatarText: {
+    fontSize: 18,
     fontWeight: "600",
     color: "white",
   },
-  text: {
-    justifyContent: "flex-end",
+  content: {
+    flex: 1,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 4,
+  },
+  username: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#1C1C1E",
+  },
+  date: {
+    fontSize: 12,
+    color: "#8E8E93",
+  },
+  message: {
+    fontSize: 14,
+    color: "#8E8E93",
+    lineHeight: 18,
+  },
+  actions: {
+    marginLeft: 8,
   },
 });
 
-export default roomBox;
+export default RoomBox;
