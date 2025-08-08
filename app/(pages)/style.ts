@@ -11,9 +11,8 @@ export default StyleSheet.create({
     flex: 1,
   },
   inputView: {
-    backgroundColor: "gray",
     padding: 5,
-    width: "100%"
+    width: "100%",
   },
   view: {
     flex: 1,
@@ -23,12 +22,12 @@ export default StyleSheet.create({
   },
   input: {
     flex: 1,
-    padding: 12,
+    padding: 15,
     margin: 4,
-    borderRadius: 5,
+    borderRadius: 25,
     outline: "none",
     borderColor: "transparent",
-    backgroundColor: "white",
+    backgroundColor: "#E0E0E0",
   },
 
   sendView: {

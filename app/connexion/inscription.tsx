@@ -28,6 +28,10 @@ const index = () => {
           <TextInput style={styles.input} />
         </View>
         <View style={styles.inputContainer}>
+          <Text style={{ marginHorizontal: 5 }}>Numero</Text>
+          <TextInput style={styles.input} />
+        </View>
+        <View style={styles.inputContainer}>
           <Text style={{ marginHorizontal: 5 }}>E-Mail</Text>
           <TextInput style={styles.input} keyboardType="email-address"/>
         </View>

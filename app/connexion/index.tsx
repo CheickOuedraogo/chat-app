@@ -20,8 +20,8 @@ const index = () => {
         style={styles.center}
       >
         <View style={styles.inputContainer}>
-          <Text style={{ marginHorizontal: 5 }}>E-Mail</Text>
-          <TextInput style={styles.input} keyboardType="email-address" />
+          <Text style={{ marginHorizontal: 5 }}>Numero</Text>
+          <TextInput style={styles.input} keyboardType="number-pad" placeholder="+226 12345678" />
         </View>
         <View style={styles.inputContainer}>
           <Text style={{ marginHorizontal: 5 }}>Password</Text>
